@@ -10,5 +10,5 @@ Run `npm start` in each directory to kick off a simple [chokidar-cli][] watch wh
 This may not stick, but my initial goals are to solve each day's puzzles without libraries, then to go back and try to use libraries to save work. Theoretically this should help be better understand what each lib does, and exactly how much time they could save me. (the only exception is [pretty hrtime][pretty-hrtime] for reporting)
 
 [aoc2016]: http://adventofcode.com/2016
-[chokdar-cli]: https://github.com/kimmobrunfeldt/chokidar-cli
+[chokidar-cli]: https://github.com/kimmobrunfeldt/chokidar-cli
 [pretty-hrtime]: https://www.npmjs.com/package/pretty-hrtime
