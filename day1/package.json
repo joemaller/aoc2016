@@ -4,14 +4,17 @@
   "description": "",
   "main": "day1.js",
   "scripts": {
-    "watch": "watch -f day1.js -r 'node day1.js'",
+    "start": "chokidar '*.js' -c 'node {path}'",
+    "watch": "watch -f *.js -r 'node day1-b.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chokidar-cli": "^1.2.0",
     "cli-watch": "^1.0.6",
-    "pretty-hrtime": "^1.0.3"
+    "pretty-hrtime": "^1.0.3",
+    "watch": "^1.0.2"
   }
 }
