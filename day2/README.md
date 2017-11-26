@@ -1,5 +1,6 @@
 # [Day 2](http://adventofcode.com/2016/day/2)
 
+## Part 1
 This one seemed like it shouldn't be too hard, basically just a two-dimensional array with a few simple functions that returned bounded values. However I did something a little bit stupid which was slightly difficult to track down. Here's one of my original, too-clever directional functions:
 
     const left = i => (--i[1] >= 0) ? i : [i[0], 0];
@@ -25,12 +26,40 @@ const getDigit = (steps, origin) =>
 The first call is seeded with origin `[1, 1]`.
 
 
+## Part 2
+I must have made some good choices on part one, because I didn't have to  adapt much to arrive at this solution.
 
+For part one, it was possible to just check whether the keypad array indexes were in bounds. With the quirky keypad in part 2, that wasn't going to work and it would be necessary to evaluate the actual keypad values. 
 
- -->
+To simplify, I decided initially the entire keypad should be bounded with zeros. I also wanted the code to look like the keypad diagram, but I'm really lazy and didn't want to use strings everywhere -- too many quotemarks. Instead, I used a clever little hack which assigned strings to uppercase constants. Using ES6 destructuring assignment, it's nearly pythonic:
 
+``` js
+const [A, B, C, D, _︎] = "ABCD_︎".split("");
+```
 
-I did something a little bit stupid here which was surprisingly hard to nail down.
+Oh, and once I was there, I decided the zeros were too cumbersome and switched them out for an underscore (various unicode characters didn't work). This made me happy:
 
+``` js
+const keypad = [
+    [_︎, _︎, _︎, _︎, _︎, _︎, _︎],
+    [_︎, _︎, _︎, 1, _︎, _︎, _︎],
+    [_︎, _︎, 2, 3, 4, _︎, _︎],
+    [_︎, 5, 6, 7, 8, 9, _︎],
+    [_︎, _︎, A, B, C, _︎, _︎],
+    [_︎, _︎, _︎, D, _︎, _︎, _︎],
+    [_︎, _︎, _︎, _︎, _︎, _︎, _︎]
+];
+```
+
+Here are the revised directional commands, note that underscore becomes the falsey value. 
+
+``` js
+const up = i => (keypad[i[0] - 1][i[1]] != _︎ ? [i[0] - 1, i[1]] : i.slice());
+const down = i => (keypad[i[0] + 1][i[1]] != _︎ ? [i[0] + 1, i[1]] : i.slice());
+const left = i => (keypad[i[0]][i[1] - 1] != _︎ ? [i[0], i[1] - 1] : i.slice());
+const right = i => (keypad[i[0]][i[1] + 1] != _︎ ? [i[0], i[1] + 1] : i.slice());
+```
+
+Moving on to day 3!
 
 [ref]: http://orizens.com/wp/topics/javascript-arrays-passing-by-reference-or-by-value/
